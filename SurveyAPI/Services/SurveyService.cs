@@ -18,14 +18,18 @@ namespace SurveyAPI.Services
         }
 
 
-        public IEnumerable<Survey> GetAll()
+        public IEnumerable<Survey> GetAll(int userID)
         {
-            return _context.Survey;
+            return _context.Survey.Where(x => x.OwnerId == userID && x.Deleted == false).OrderByDescending(x => x.CreatedOn).ToList();
         }
 
         public Survey GetById(int id)
         {
             return _context.Survey.Find(id);
+        }
+        public Survey GetByUIId(Guid id)
+        {
+            return _context.Survey.Where(x => x.SurveyGuid == id && x.Deleted == false && x.ExpDate >= DateTime.Now && x.IsLive == true).FirstOrDefault();
         }
 
         public Survey Create(Survey survey)
@@ -55,7 +59,8 @@ namespace SurveyAPI.Services
             var survey = _context.Survey.Find(id);
             if (survey != null)
             {
-                _context.Survey.Remove(survey);
+                survey.Deleted = true;
+                _context.Survey.Update(survey);
                 _context.SaveChanges();
             }
         }

@@ -36,15 +36,25 @@ namespace SurveyAPI.Controllers
             _surveyService.Update(survey);
             return Ok(_mapper.Map<SurveyDto>(survey));
         }
-
+        
         [HttpGet("GetStatistics")]
         public IActionResult GetStatistics(int userid)
         {
-            var data = _commonRepository.getStatisticsData(userid);            
+            var data = _commonRepository.getStatisticsData(userid);
             return Ok(data);
         }
-
-
+        [HttpGet("GetSurveyByID")]
+        public IActionResult GetSurveyByID(int surveyid)
+        {
+            var data = _surveyService.GetById(surveyid);
+            return Ok(_mapper.Map<SurveyDto>(data));
+        }
+        [HttpGet("GetLastTwoSurvey")]
+        public IActionResult GetLastTwoSurvey(int userid)
+        {
+            var data = _surveyService.GetAll(userid).Take(2);
+            return Ok(data);
+        }
         [HttpPost("create")]
         public IActionResult Create([FromBody]SurveyDto surveyDto)
         {
@@ -67,19 +77,15 @@ namespace SurveyAPI.Controllers
         }
 
 
-        [HttpGet]
-        public IActionResult GetAll()
+        [HttpGet("{id}")]
+        [HttpGet("GetUserAllSurvey")]
+        public IActionResult GetUserAllSurvey(int userid)
         {
-            var survey = _surveyService.GetAll();
+            var survey = _surveyService.GetAll(userid);
             return Ok(survey);
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetById(int id)
-        {
-            var survey = _surveyService.GetById(id);
-            return Ok(survey);
-        }
+       
 
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody]Survey survey)
