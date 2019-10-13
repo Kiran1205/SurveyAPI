@@ -10,9 +10,9 @@ namespace SurveyAPI.Services
 {
     public class AnswerSubmissionService : IAnswerSubmissionService
     {
-        private DataContext _context;
+        private IDataContext _context;
 
-        public AnswerSubmissionService(DataContext context)
+        public AnswerSubmissionService(IDataContext context)
         {
             _context = context;
         }

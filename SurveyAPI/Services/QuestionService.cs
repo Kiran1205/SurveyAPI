@@ -10,9 +10,9 @@ namespace SurveyAPI.Services
 {
     public class QuestionService : IQuestionService
     {
-        private DataContext _context;
+        private IDataContext _context;
 
-        public QuestionService(DataContext context)
+        public QuestionService(IDataContext context)
         {
             _context = context;
         }

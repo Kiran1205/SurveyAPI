@@ -15,5 +15,14 @@ namespace SurveyAPI.Entities.Context
         public DbSet<Questions> Questions { get; set; }
         public DbSet<QuestionOption> QuestionOptions { get; set; }
         public DbSet<AnswerSubmission> AnswerSubmissions { get; set; }
+
+        /// <summary>
+        /// Saves the changes.
+        /// </summary>
+        /// <returns></returns>
+        public override int SaveChanges()
+        {
+            return base.SaveChanges();
+        }
     }
 }

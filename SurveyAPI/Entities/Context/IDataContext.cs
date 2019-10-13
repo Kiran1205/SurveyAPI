@@ -13,5 +13,11 @@ namespace SurveyAPI.Entities.Context
          DbSet<Questions> Questions { get; set; }
          DbSet<QuestionOption> QuestionOptions { get; set; }
          DbSet<AnswerSubmission> AnswerSubmissions { get; set; }
+
+        /// <summary>
+        /// SaveChanges
+        /// </summary>
+        /// <returns></returns>
+        int SaveChanges();
     }
 }

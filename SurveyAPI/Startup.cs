@@ -86,7 +86,7 @@ namespace SurveyAPI
             services.AddScoped<IQuestionOptionService, QuestionOptionService>();
             services.AddScoped<IAnswerSubmissionService, AnswerSubmissionService>();
             services.AddTransient<CommonRepository, CommonRepository>();
-          
+            services.AddScoped<IDataContext, DataContext>();
 
             services.AddSwaggerGen(c =>
             {
