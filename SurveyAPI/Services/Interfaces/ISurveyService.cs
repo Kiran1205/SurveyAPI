@@ -14,5 +14,6 @@ namespace SurveyAPI.Services.Interfaces
         void Update(Survey survey);
         void Delete(int id);
         Survey GetByUIId(Guid id);
+        Survey GetBySurveyId(int id);
     }
 }

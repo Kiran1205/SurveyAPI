@@ -31,6 +31,10 @@ namespace SurveyAPI.Services
         {
             return _context.Questions.Where(x => x.SurveyId == id).ToList();
         }
+        public int QuestionCountBySurvey(int surveyId)
+        {
+            return GetBySurveyId(surveyId).Count();
+        }
 
         public Questions Create(Questions question)
         {

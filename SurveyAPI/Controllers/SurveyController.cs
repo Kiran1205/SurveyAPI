@@ -18,20 +18,25 @@ namespace SurveyAPI.Controllers
     public class SurveyController : ControllerBase
     {
         private ISurveyService _surveyService;
+        private IQuestionService _questionService;
         private IMapper _mapper;
         private CommonRepository _commonRepository;
         public SurveyController(ISurveyService surveyService, IMapper mapper,
-            CommonRepository commonRepository)
+            CommonRepository commonRepository,
+            IQuestionService questionService)
         {
             _surveyService = surveyService;
             _mapper = mapper;
             _commonRepository = commonRepository;
+            _questionService = questionService;
         }
 
         [HttpGet("GetSurveyLink")]
         public IActionResult GetSurveyLink(int id)
         {
             var survey = _surveyService.GetById(id);
+            if (survey == null)
+                return BadRequest();
             survey.IsLive = true;
             _surveyService.Update(survey);
             return Ok(_mapper.Map<SurveyDto>(survey));
@@ -52,8 +57,15 @@ namespace SurveyAPI.Controllers
         [HttpGet("GetLastTwoSurvey")]
         public IActionResult GetLastTwoSurvey(int userid)
         {
+            List<SurveyDto> surveylist = new List<SurveyDto>();
             var data = _surveyService.GetAll(userid).Take(2);
-            return Ok(data);
+            foreach (var item in data)
+            {
+                var surveydto = _mapper.Map<SurveyDto>(item);
+                surveydto.QuestioinCount = _questionService.QuestionCountBySurvey(surveydto.Id);
+                surveylist.Add(surveydto);
+            }
+            return Ok(surveylist);
         }
         [HttpPost("create")]
         public IActionResult Create([FromBody]SurveyDto surveyDto)

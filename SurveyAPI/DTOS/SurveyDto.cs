@@ -16,5 +16,6 @@ namespace SurveyAPI.DTOS
         public bool Deleted { get; set; }
         public Guid SurveyGuid { get; set; }
         public bool IsLive { get; set; }
+        public int QuestioinCount { get; set; }
     }
 }

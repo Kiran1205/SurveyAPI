@@ -14,5 +14,6 @@ namespace SurveyAPI.Services.Interfaces
         void Update(Questions question);
         void Delete(int id);
         IEnumerable<Questions> GetBySurveyId(int id);
+        int QuestionCountBySurvey(int surveyId);
     }
 }

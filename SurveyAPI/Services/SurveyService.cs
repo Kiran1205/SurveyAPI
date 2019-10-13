@@ -31,6 +31,10 @@ namespace SurveyAPI.Services
         {
             return _context.Survey.Where(x => x.SurveyGuid == id && x.Deleted == false && x.ExpDate >= DateTime.Now && x.IsLive == true).FirstOrDefault();
         }
+        public Survey GetBySurveyId(int id)
+        {
+            return _context.Survey.Where(x => x.Id == id && x.Deleted == false && x.ExpDate >= DateTime.Now && x.IsLive == true).FirstOrDefault();
+        }
 
         public Survey Create(Survey survey)
         {
