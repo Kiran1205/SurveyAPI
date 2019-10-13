@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAUnnW/ouIPUywfRFvLckW8QAAAAACAAAAAAAQZgAAAAEAACAAAADyVt626RzGIe/pEyezLFHo3IwbyReiWNfmfqJ49uAC5AAAAAAOgAAAAAIAACAAAAA2yJl9rPJVdOHd1sPGd2YGGlWTlHYlMroEe1+rd+UiGSAAAAC1QPaSXAm+VIonuTSSkAK8/jWrGobm5t7XRiGUtuLEiUAAAAAASTXtcFhcYW3ajaQ9vwEkbFKbn3TUpu3Fn3AxbjxfbpqKKOcnUcgtM2Htl7ET6XDV+Tgpo2uD7W57ZBN8nHPw</EncryptedPassword>
+    <_PublishTargetUrl>ftp://praveensomee@www.lijotest.somee.com/www.lijotest.somee.com</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="appsettings.Development.json">
+      <publishTime>10/10/2019 03:33:55</publishTime>
+    </File>
+    <File Include="appsettings.json">
+      <publishTime>10/10/2019 23:45:28</publishTime>
+    </File>
+    <File Include="AutoMapper.dll">
+      <publishTime>11/17/2018 10:14:56</publishTime>
+    </File>
+    <File Include="AutoMapper.Extensions.Microsoft.DependencyInjection.dll">
+      <publishTime>11/18/2018 08:27:48</publishTime>
+    </File>
+    <File Include="SurveyAPI.deps.json">
+      <publishTime>10/10/2019 23:52:25</publishTime>
+    </File>
+    <File Include="SurveyAPI.dll">
+      <publishTime>10/10/2019 23:52:15</publishTime>
+    </File>
+    <File Include="SurveyAPI.pdb">
+      <publishTime>10/10/2019 23:52:15</publishTime>
+    </File>
+    <File Include="SurveyAPI.runtimeconfig.json">
+      <publishTime>10/10/2019 23:52:25</publishTime>
+    </File>
+    <File Include="Swashbuckle.AspNetCore.dll">
+      <publishTime>11/07/2018 10:25:10</publishTime>
+    </File>
+    <File Include="Swashbuckle.AspNetCore.Swagger.dll">
+      <publishTime>11/07/2018 10:25:06</publishTime>
+    </File>
+    <File Include="Swashbuckle.AspNetCore.SwaggerGen.dll">
+      <publishTime>11/07/2018 10:25:08</publishTime>
+    </File>
+    <File Include="Swashbuckle.AspNetCore.SwaggerUI.dll">
+      <publishTime>11/07/2018 10:25:06</publishTime>
+    </File>
+    <File Include="web.config">
+      <publishTime>10/10/2019 23:52:25</publishTime>
+    </File>
+  </ItemGroup>
+</Project>
