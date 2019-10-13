@@ -27,6 +27,10 @@ namespace SurveyAPI.Services
         {
             return _context.QuestionOptions.Find(id);
         }
+        public IEnumerable<QuestionOption> GetByQuestionId(int id)
+        {
+            return _context.QuestionOptions.Where(x => x.QuestionId == id).ToList();
+        }
 
         public QuestionOption Create(QuestionOption question)
         {

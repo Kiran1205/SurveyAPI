@@ -13,5 +13,6 @@ namespace SurveyAPI.Services.Interfaces
         QuestionOption Create(QuestionOption questionOption);
         void Update(QuestionOption questionOption);
         void Delete(int id);
+        IEnumerable<QuestionOption> GetByQuestionId(int id);
     }
 }

@@ -12,7 +12,7 @@ namespace SurveyAPI.Entities.Context
 
         public DbSet<Users> Users { get; set; }
         public DbSet<Survey> Survey { get; set; }
-        public DbSet<Question> Questions { get; set; }
+        public DbSet<Questions> Questions { get; set; }
         public DbSet<QuestionOption> QuestionOptions { get; set; }
         public DbSet<AnswerSubmission> AnswerSubmissions { get; set; }
     }

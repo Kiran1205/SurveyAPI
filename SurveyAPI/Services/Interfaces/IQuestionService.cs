@@ -8,10 +8,11 @@ namespace SurveyAPI.Services.Interfaces
 {
     public interface IQuestionService
     {
-        IEnumerable<Question> GetAll();
-        Question GetById(int id);
-        Question Create(Question question);
-        void Update(Question question);
+        IEnumerable<Questions> GetAll();
+        Questions GetById(int id);
+        Questions Create(Questions question);
+        void Update(Questions question);
         void Delete(int id);
+        IEnumerable<Questions> GetBySurveyId(int id);
     }
 }

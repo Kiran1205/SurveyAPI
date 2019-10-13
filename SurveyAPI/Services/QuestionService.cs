@@ -18,25 +18,29 @@ namespace SurveyAPI.Services
         }
 
 
-        public IEnumerable<Question> GetAll()
+        public IEnumerable<Questions> GetAll()
         {
             return _context.Questions;
         }
 
-        public Question GetById(int id)
+        public Questions GetById(int id)
         {
             return _context.Questions.Find(id);
         }
-
-        public Question Create(Question question)
+        public IEnumerable<Questions> GetBySurveyId(int id)
         {
-            _context.Questions.Add(question);
+            return _context.Questions.Where(x => x.SurveyId == id).ToList();
+        }
+
+        public Questions Create(Questions question)
+        {
+            _context.Questions.Add(question);          
             _context.SaveChanges();
 
             return question;
         }
 
-        public void Update(Question questionParam)
+        public void Update(Questions questionParam)
         {
             var question = _context.Questions.Find(questionParam.Id);
 
@@ -44,7 +48,7 @@ namespace SurveyAPI.Services
                 throw new Exception("Question not found");
 
             question.Ques = questionParam.Ques;
-            question.TypeId = questionParam.TypeId;
+            question.QuestionType = questionParam.QuestionType;
             _context.Questions.Update(question);
             _context.SaveChanges();
         }
