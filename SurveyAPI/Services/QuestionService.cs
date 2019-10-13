@@ -58,6 +58,11 @@ namespace SurveyAPI.Services
             var question = _context.Questions.Find(id);
             if (question != null)
             {
+                var options = _context.QuestionOptions.Where(x => x.QuestionId == id).ToList();
+                foreach (var item in options)
+                {
+                    _context.QuestionOptions.Remove(item);
+                }
                 _context.Questions.Remove(question);
                 _context.SaveChanges();
             }

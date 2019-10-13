@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SurveyAPI.DTOS;
 using SurveyAPI.Entities;
+using SurveyAPI.Repositories;
 using SurveyAPI.Services.Interfaces;
 
 namespace SurveyAPI.Controllers
@@ -15,25 +18,46 @@ namespace SurveyAPI.Controllers
     public class SurveyController : ControllerBase
     {
         private ISurveyService _surveyService;
-
-        public SurveyController(ISurveyService surveyService)
+        private IMapper _mapper;
+        private CommonRepository _commonRepository;
+        public SurveyController(ISurveyService surveyService, IMapper mapper,
+            CommonRepository commonRepository)
         {
             _surveyService = surveyService;
-
+            _mapper = mapper;
+            _commonRepository = commonRepository;
         }
 
-        [HttpPost("create")]
-        public IActionResult Create([FromBody]Survey survey)
+        [HttpGet("GetSurveyLink")]
+        public IActionResult GetSurveyLink(int id)
         {
-            if (survey == null)
+            var survey = _surveyService.GetById(id);
+            survey.IsLive = true;
+            _surveyService.Update(survey);
+            return Ok(_mapper.Map<SurveyDto>(survey));
+        }
+
+        [HttpGet("GetStatistics")]
+        public IActionResult GetStatistics(int userid)
+        {
+            var data = _commonRepository.getStatisticsData(userid);            
+            return Ok(data);
+        }
+
+
+        [HttpPost("create")]
+        public IActionResult Create([FromBody]SurveyDto surveyDto)
+        {
+            if (surveyDto == null)
                 return BadRequest(new { message = "Bad request" });
 
             try
             {
+                var survey = _mapper.Map<Survey>(surveyDto);
                 survey.CreatedOn = DateTime.Now;
                 survey.SurveyGuid = Guid.NewGuid();
-                var createdsurey = _surveyService.Create(survey);
-                return Ok(createdsurey);
+                _surveyService.Create(survey);
+                return Ok(_mapper.Map<SurveyDto>(survey));
             }
             catch (Exception ex)
             {

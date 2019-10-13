@@ -17,6 +17,7 @@ using Microsoft.IdentityModel.Tokens;
 using SurveyAPI.Entities.Context;
 using SurveyAPI.Filter;
 using SurveyAPI.Helpers;
+using SurveyAPI.Repositories;
 using SurveyAPI.Services;
 using SurveyAPI.Services.Interfaces;
 
@@ -84,6 +85,8 @@ namespace SurveyAPI
             services.AddScoped<IQuestionService, QuestionService>();
             services.AddScoped<IQuestionOptionService, QuestionOptionService>();
             services.AddScoped<IAnswerSubmissionService, AnswerSubmissionService>();
+            services.AddTransient<CommonRepository, CommonRepository>();
+          
 
             services.AddSwaggerGen(c =>
             {

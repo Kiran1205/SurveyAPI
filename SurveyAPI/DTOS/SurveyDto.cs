@@ -16,5 +16,6 @@ namespace SurveyAPI.DTOS
         public DateTime ExpDate { get; set; }
         public bool Deleted { get; set; }
         public Guid SurveyGuid { get; set; }
+        public bool IsLive { get; set; }
     }
 }
