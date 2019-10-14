@@ -22,7 +22,6 @@ namespace SurveyAPI.Services
         {
             _context.AnswerSubmissions.Add(submission);
             _context.SaveChanges();
-
             return submission;
         }
 

@@ -6,17 +6,29 @@ create database  SurveyDB
 go
 use SurveyDB
 go
-
 CREATE TABLE [dbo].[AnswerSubmissions](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[QuestionId] [int] NOT NULL,
-	[Answer] [nvarchar](max) NOT NULL,
-	[CreatedOn] [datetime] NOT NULL,
+	[OptionDetail] [nvarchar](max) NULL,
+	[SelectedValue] [nvarchar](max) NULL,
+	[AnonymouseUserID] [int] NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+CREATE TABLE [dbo].[AnonymousUser](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[SurveyID] int not null,
+	[CreatedOn] Datetime not null
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] 
 GO
 
 SET ANSI_NULLS ON
@@ -145,7 +157,6 @@ GO
 
 SET QUOTED_IDENTIFIER ON
 GO
-
 create proc [dbo].[sp_getcountodisplay](@userid int)
 as 
 begin
@@ -154,8 +165,11 @@ begin
 	select @opensurvey = count(0) from Survey where OwnerId = @userid and ExpDate >=getdate() and Deleted =0 and IsLive = 1
 	select @closedsurvey= count(0) from Survey where OwnerId = @userid and ExpDate <getdate() and Deleted =0 and IsLive = 1
 	select @draft= count(0) from Survey where OwnerId = @userid  and Deleted =0 and IsLive = 0
+	select @totalresponse = count(0) from dbo.AnonymousUser u
+	inner join dbo.Survey s on  s.Id = u.SurveyID and OwnerId = @userid  
 	
-	select @opensurvey as opensurvey, @closedsurvey as closedsurvey,@draft as draft,0 as totalresponse
+	select @opensurvey as opensurvey, @closedsurvey as closedsurvey,@draft as draft,@totalresponse as totalresponse
 	
-
+	
 end
+go

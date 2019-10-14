@@ -15,6 +15,7 @@ namespace SurveyAPI.Entities.Context
         public DbSet<Questions> Questions { get; set; }
         public DbSet<QuestionOption> QuestionOptions { get; set; }
         public DbSet<AnswerSubmission> AnswerSubmissions { get; set; }
+        public DbSet<AnonymousUser> AnonymousUser { get; set; }
 
         /// <summary>
         /// Saves the changes.

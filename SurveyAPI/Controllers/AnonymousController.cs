@@ -20,17 +20,23 @@ namespace SurveyAPI.Controllers
         private IQuestionService _questionService;
         private ISurveyService _surveyService;
         private IQuestionOptionService _optionservice;
+        private IAnonymousUserService _anonymousUserService;
+        private IAnswerSubmissionService _answerSubmissionService;
         private IMapper _mapper;
         public AnonymousController(IQuestionService questionService,
              IMapper mapper,
             IQuestionOptionService optionService,
-            ISurveyService surveyService
+            ISurveyService surveyService,
+            IAnonymousUserService anonymousUserService,
+            IAnswerSubmissionService answerSubmissionService
             )
         {
             _questionService = questionService;
             _mapper = mapper;
             _optionservice = optionService;
             _surveyService = surveyService;
+            _anonymousUserService = anonymousUserService;
+            _answerSubmissionService = answerSubmissionService;
         }
         [HttpGet("GetSurveInfo")]
         public IActionResult GetSurveInfo(Guid id)
@@ -64,6 +70,31 @@ namespace SurveyAPI.Controllers
                 questiondtolist.Add(question);
             }
             return Ok(questiondtolist);
+        }
+
+        [HttpPost("SaveSurvey")]
+        public IActionResult Save([FromBody] List<QuestionsDto> ListQuestionsDto)
+        {
+            if (ListQuestionsDto == null)
+                return BadRequest();
+
+            var anonymousUser = _anonymousUserService.Create(new AnonymousUser()
+            {
+                SurveyID = ListQuestionsDto[0].SurveyId,
+                CreatedOn = DateTime.Now
+            });
+
+            foreach (var questionsubmitted in ListQuestionsDto)
+            {
+                foreach (var item in questionsubmitted.Qoptions)
+                {
+                    var answersubmitted = _mapper.Map<AnswerSubmission>(item);
+                    answersubmitted.AnonymouseUserID = anonymousUser.Id;
+                    _answerSubmissionService.Create(answersubmitted);
+                }
+               
+            }
+            return Ok();
         }
     }
 }

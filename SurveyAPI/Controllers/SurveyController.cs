@@ -21,14 +21,17 @@ namespace SurveyAPI.Controllers
         private IQuestionService _questionService;
         private IMapper _mapper;
         private CommonRepository _commonRepository;
+        private IAnonymousUserService _anonymousUserService;
         public SurveyController(ISurveyService surveyService, IMapper mapper,
             CommonRepository commonRepository,
-            IQuestionService questionService)
+            IQuestionService questionService,
+            IAnonymousUserService anonymousUserService)
         {
             _surveyService = surveyService;
             _mapper = mapper;
             _commonRepository = commonRepository;
             _questionService = questionService;
+            _anonymousUserService = anonymousUserService;
         }
 
         [HttpGet("GetSurveyLink")]
@@ -63,6 +66,7 @@ namespace SurveyAPI.Controllers
             {
                 var surveydto = _mapper.Map<SurveyDto>(item);
                 surveydto.QuestioinCount = _questionService.QuestionCountBySurvey(surveydto.Id);
+                surveydto.ResponseCount = _anonymousUserService.AnonymousCountBySurvey(surveydto.Id);
                 surveylist.Add(surveydto);
             }
             return Ok(surveylist);

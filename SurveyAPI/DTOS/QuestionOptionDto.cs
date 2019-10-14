@@ -9,6 +9,7 @@ namespace SurveyAPI.DTOS
     {
         public int Id { get; set; }
         public string OptionDetail { get; set; }
+        public string SelectedValue { get; set; }
         public int QuestionId { get; set; }
         public DateTime CreatedOn { get; set; }
     }

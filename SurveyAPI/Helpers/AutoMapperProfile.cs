@@ -26,6 +26,8 @@ namespace SurveyAPI.Helpers
 
             CreateMap<QuestionOption, QuestionOptionDto>();
             CreateMap<QuestionOptionDto, QuestionOption>();
+
+            CreateMap<QuestionOptionDto, AnswerSubmission>();
         }
     }
 }

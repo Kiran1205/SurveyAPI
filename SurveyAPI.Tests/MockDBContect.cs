@@ -11,14 +11,15 @@ namespace SurveyAPI.Tests
     {
         public MockDBContect()
         {
-            Users.Add(new Entities.Users() { FirstName = "Nitesh", Id = 1, LastName = "Singh", Username = "nsingh" });
-            Users.Add(new Entities.Users() { FirstName = "Ritesh", Id = 2, LastName = "Singh", Username = "rsingh" });
+            //Users.Add(new Entities.Users() { FirstName = "Nitesh", Id = 1, LastName = "Singh", Username = "nsingh" });
+            //Users.Add(new Entities.Users() { FirstName = "Ritesh", Id = 2, LastName = "Singh", Username = "rsingh" });
         }
         public DbSet<Users> Users { get; set; }
         public DbSet<Survey> Survey { get; set; }
         public DbSet<Questions> Questions { get; set; }
         public DbSet<QuestionOption> QuestionOptions { get; set; }
         public DbSet<AnswerSubmission> AnswerSubmissions { get; set; }
+        public  DbSet<AnonymousUser> AnonymousUser { get; set; }
 
         public int SaveChanges()
         {

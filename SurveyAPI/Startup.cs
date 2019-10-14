@@ -85,6 +85,7 @@ namespace SurveyAPI
             services.AddScoped<IQuestionService, QuestionService>();
             services.AddScoped<IQuestionOptionService, QuestionOptionService>();
             services.AddScoped<IAnswerSubmissionService, AnswerSubmissionService>();
+            services.AddScoped<IAnonymousUserService, AnonymousUserService>();
             services.AddTransient<CommonRepository, CommonRepository>();
             services.AddScoped<IDataContext, DataContext>();
 
