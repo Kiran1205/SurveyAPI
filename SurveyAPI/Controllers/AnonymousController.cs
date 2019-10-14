@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SurveyAPI.DTOS;
 using SurveyAPI.Entities;
 using SurveyAPI.Services.Interfaces;
+using System;
+using System.Collections.Generic;
 
 namespace SurveyAPI.Controllers
 {
-    
+
     [ApiController]
     [Route("[controller]")]
     public class AnonymousController : ControllerBase

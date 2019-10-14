@@ -10,10 +10,8 @@ using SurveyAPI.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace SurveyAPI.Controllers
 {
@@ -40,6 +38,10 @@ namespace SurveyAPI.Controllers
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody]UserDto userDto)
         {
+
+            if (userDto == null)
+                return BadRequest();
+
             var user = _userService.Authenticate(userDto.Username, userDto.Password);
 
             if (user == null)
@@ -101,9 +103,17 @@ namespace SurveyAPI.Controllers
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            var user = _userService.GetById(id);
-            var userDto = _mapper.Map<UserDto>(user);
-            return Ok(userDto);
+            try
+            {
+
+                var user = _userService.GetById(id);
+                var userDto = _mapper.Map<UserDto>(user);
+                return Ok(userDto);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
 
         [HttpPut("{id}")]
@@ -129,8 +139,17 @@ namespace SurveyAPI.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            _userService.Delete(id);
-            return Ok();
+            try
+            {
+                //delete
+                _userService.Delete(id);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+            
         }
     }
 }

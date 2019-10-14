@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SurveyAPI.Entities;
 using SurveyAPI.Services.Interfaces;
+using System;
 
 namespace SurveyAPI.Controllers
 {
@@ -44,15 +41,31 @@ namespace SurveyAPI.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var questionOption = _questionService.GetAll();
-            return Ok(questionOption);
+            try
+            {
+                var questionOption = _questionService.GetAll();
+                return Ok(questionOption);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+           
         }
 
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            var questionOption = _questionService.GetById(id);
-            return Ok(questionOption);
+            try
+            {
+                var questionOption = _questionService.GetById(id);
+                return Ok(questionOption);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+
         }
 
         [HttpPut("{id}")]

@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SurveyAPI.DTOS;
 using SurveyAPI.Entities;
 using SurveyAPI.Services.Interfaces;
+using System;
+using System.Collections.Generic;
 
 namespace SurveyAPI.Controllers
 {
@@ -73,13 +71,7 @@ namespace SurveyAPI.Controllers
             var questions = _questionService.GetAll();
             return Ok(questions);
         }
-
-        //[HttpGet("{id}")]
-        //public IActionResult GetById(int id)
-        //{
-        //    var questions = _questionService.GetById(id);
-        //    return Ok(questions);
-        //}
+        
         [HttpGet("{id}")]
         public IActionResult GetBySurveyId(int id)
         {
@@ -120,8 +112,17 @@ namespace SurveyAPI.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            _questionService.Delete(id);
-            return Ok();
+            try
+            {
+                _questionService.Delete(id);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                // return error message if there was an exception
+                return BadRequest();
+            }
+
         }
     }
 }

@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SurveyAPI.DTOS;
 using SurveyAPI.Entities;
 using SurveyAPI.Repositories;
 using SurveyAPI.Services.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SurveyAPI.Controllers
 {
@@ -113,18 +112,27 @@ namespace SurveyAPI.Controllers
                 _surveyService.Update(survey);
                 return Ok();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                // return error message if there was an exception
-                return BadRequest(new { message = ex.Message });
+                   
+                return BadRequest();
             }
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            _surveyService.Delete(id);
-            return Ok();
+            try
+            {
+                _surveyService.Delete(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                
+                return BadRequest();
+            }
+
         }
     }
 }
