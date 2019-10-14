@@ -11,8 +11,8 @@ namespace SurveyAPI.Tests
     {
         public MockDBContect()
         {
-            //Users.Add(new Entities.Users() { FirstName = "Nitesh", Id = 1, LastName = "Singh", Username = "nsingh" });
-            //Users.Add(new Entities.Users() { FirstName = "Ritesh", Id = 2, LastName = "Singh", Username = "rsingh" });
+            //Users.Add(new Entities.Users() { FirstName = "kiran", Id = 1, LastName = "pericharla", Username = "kiran" });
+            //Users.Add(new Entities.Users() { FirstName = "Ritesh", Id = 2, LastName = "pericharla", Username = "rpericharla" });
         }
         public DbSet<Users> Users { get; set; }
         public DbSet<Survey> Survey { get; set; }
