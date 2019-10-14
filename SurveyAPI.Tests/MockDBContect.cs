@@ -19,7 +19,7 @@ namespace SurveyAPI.Tests
         public DbSet<Questions> Questions { get; set; }
         public DbSet<QuestionOption> QuestionOptions { get; set; }
         public DbSet<AnswerSubmission> AnswerSubmissions { get; set; }
-        public  DbSet<AnonymousUser> AnonymousUser { get; set; }
+        public DbSet<AnonymousUser> AnonymousUser { get; set; }
 
         public int SaveChanges()
         {
